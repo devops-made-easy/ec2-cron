@@ -14,14 +14,14 @@ Globals:
 Parameters:
   TagKey:
     Type: String
-    Description: Name of the Tag associated to EC2 instance
+    Description: Name of the Tag Key associated to EC2 instance. Example=Name
   TagValue:
     Type: String
-    Description: Value of the Tag Name associated to EC2 instance
+    Description: Value of the Tag Key associated to EC2 instance. Example=Demo
   Action:
     Type: String
     AllowedValues: [ "START" , "STOP", "REBOOT" ]
-    Description: Action to be performed on associated EC2 instance
+    Description: Action to be performed on associated EC2 instance. Allowed Values are  "START" or "STOP" or "REBOOT".
   CronSchedule:
     Type: String
     Description: Refer https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
@@ -36,7 +36,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop", "ec2"]
     HomePageUrl: https://github.com/devops-made-easy/ec2-cron
-    SemanticVersion: 1.0.0
+    SemanticVersion: 1.0.1
     SourceCodeUrl: https://github.com/devops-made-easy/ec2-cron
 
 Resources:
