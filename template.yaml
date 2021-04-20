@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM Template that allow you to schedule a CRON job to perform START, STOP or REBOOT for
+  EC2 INSTANCES that match TAG_KEY and TAG_VALUE
+
+  Refer: https://github.com/devops-made-easy/ec2-cron
+
+
+Globals:
+  Function:
+    Timeout: 300
+
+Parameters:
+  TagKey:
+    Type: String
+    Description: Name of the Tag associated to EC2 instance
+  TagValue:
+    Type: String
+    Description: Value of the Tag Name associated to EC2 instance
+  Action:
+    Type: String
+    AllowedValues: [ "START" , "STOP", "REBOOT" ]
+    Description: Action to be performed on associated EC2 instance
+  CronSchedule:
+    Type: String
+    Description: Refer https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: ec2-cron
+    Description: SAM Template that allow you to schedule a CRON job to perform START, STOP or REBOOT for EC2 INSTANCES that match TAG_KEY and TAG_VALUE
+    Author: devops-made-easy
+    SpdxLicenseId: Apache-2.0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop", "ec2"]
+    HomePageUrl: https://github.com/devops-made-easy/ec2-cron
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/devops-made-easy/ec2-cron
+
+Resources:
+  EC2CronFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ec2_cron/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Environment:
+        Variables:
+          TAG_KEY: !Ref TagKey
+          TAG_VALUE: !Ref TagValue
+          ACTION: !Ref Action
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "ec2:RebootInstances"
+                - "ec2:StartInstances"
+                - "ec2:StopInstances"
+                - "ec2:DescribeInstances"
+              Resource:
+                !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance:*'
+
+
+      Events:
+        CloudWatchEvent:
+          Type: Schedule
+          Properties:
+            Schedule:
+              Ref: CronSchedule
+
+
+
+#Outputs:
+#  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+#  # Find out more about other implicit resources you can reference within SAM
+#  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+#  HelloWorldApi:
+#    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+#    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+#  HelloWorldFunction:
+#    Description: "Hello World Lambda Function ARN"
+#    Value: !GetAtt HelloWorldFunction.Arn
+#  HelloWorldFunctionIamRole:
+#    Description: "Implicit IAM Role created for Hello World function"
+#    Value: !GetAtt HelloWorldFunctionRole.Arn
