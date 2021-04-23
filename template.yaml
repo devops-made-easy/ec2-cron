@@ -29,14 +29,14 @@ Parameters:
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: ec2-cron
-    Description: SAM Template that allow you to schedule a CRON job to perform START, STOP or REBOOT for EC2 INSTANCES that match TAG_KEY and TAG_VALUE
+    Description: SAM Template that allow you to schedule a CRON job(cloudwatch rule) to perform START, STOP or REBOOT for EC2 INSTANCES for given tag key and its value.
     Author: devops-made-easy
     SpdxLicenseId: Apache-2.0
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
-    Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop", "ec2"]
+    Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop-reboot", "ec2", "cron", "scheduler", "cronjob"]
     HomePageUrl: https://github.com/devops-made-easy/ec2-cron
-    SemanticVersion: 1.0.1
+    SemanticVersion: 1.0.2
     SourceCodeUrl: https://github.com/devops-made-easy/ec2-cron
 
 Resources:
@@ -52,18 +52,17 @@ Resources:
           TAG_VALUE: !Ref TagValue
           ACTION: !Ref Action
       Policies:
-        - Version: "2012-10-17"
-          Statement:
+        - Statement:
             - Effect: "Allow"
               Action:
                 - "ec2:RebootInstances"
                 - "ec2:StartInstances"
                 - "ec2:StopInstances"
+              Resource: !Sub "arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance:*"
+            - Effect: "Allow"
+              Action:
                 - "ec2:DescribeInstances"
-              Resource:
-                !Sub 'arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance:*'
-
-
+              Resource: '*'
       Events:
         CloudWatchEvent:
           Type: Schedule
