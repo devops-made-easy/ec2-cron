@@ -1,5 +1,4 @@
 # EC2 CRON
-==============
 [![SonarCloud](https://img.shields.io/badge/scanned%20on-sonarcloud-orange?style=flat&logo=SonarCloud)](https://sonarcloud.io/dashboard?id=devops-made-easy_ec2-cron) || 
 [![AWSSAM](https://img.shields.io/badge/view%20on-Serverless_Repo-orange?style=flat&logo=amazon%20aws)](https://console.aws.amazon.com/lambda/home?#/create/app?applicationId=arn:aws:serverlessrepo:us-west-2:604621407125:applications/ec2-cron) 
 ## Features
@@ -52,17 +51,6 @@ Policy
 }
 ```
 
-
-## Deploy the sample application
-
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
-
-To use the SAM CLI, you need the following tools.
-
-* SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* [Python 3 installed](https://www.python.org/downloads/)
-* Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
-
 ## Local Development 
 
 To use the SAM CLI, you need the following tools.
@@ -84,7 +72,7 @@ AWS$ sam local invoke --env-vars env.json
 ```
 
 ## License Summary
-This sample code is made available under MIT license. See the [LICENSE](LICENSE) file.
+This sample code is made available under MIT license. See the LICENSE file.
 
 ## Share the Love
 

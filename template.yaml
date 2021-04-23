@@ -36,7 +36,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop-reboot", "ec2", "cron", "scheduler", "cronjob", "cloudwatch", "automation"]
     HomePageUrl: https://github.com/devops-made-easy/ec2-cron
-    SemanticVersion: 1.0.3
+    SemanticVersion: 1.0.5
     SourceCodeUrl: https://github.com/devops-made-easy/ec2-cron
 
 Resources:
