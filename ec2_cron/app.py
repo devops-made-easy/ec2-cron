@@ -78,6 +78,9 @@ def reboot_instances():
                 ]
             )
             print(response)
+            # below logic might be not a valid usecase - jsut added so we can think of achieving this in some form in future.
+            instance = ec2resource.Instance(instance)
+            instance.wait_until_running()
          except Exception as e:
              print(f"Error while rebooting instance {instance} \n {e}")
 

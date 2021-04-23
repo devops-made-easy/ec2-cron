@@ -31,12 +31,12 @@ Metadata:
     Name: ec2-cron
     Description: SAM Template that allow you to schedule a CRON job(cloudwatch rule) to perform START, STOP or REBOOT for EC2 INSTANCES for given tag key and its value.
     Author: devops-made-easy
-    SpdxLicenseId: Apache-2.0
+    SpdxLicenseId: MIT
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
-    Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop-reboot", "ec2", "cron", "scheduler", "cronjob"]
+    Labels: ['devops-made-easy', "ec2-start-stop", "savings", "auto-start-stop-reboot", "ec2", "cron", "scheduler", "cronjob", "cloudwatch", "automation"]
     HomePageUrl: https://github.com/devops-made-easy/ec2-cron
-    SemanticVersion: 1.0.2
+    SemanticVersion: 1.0.3
     SourceCodeUrl: https://github.com/devops-made-easy/ec2-cron
 
 Resources:
